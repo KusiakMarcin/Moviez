@@ -1,0 +1,17 @@
+FROM postgres:18
+
+
+ENV POSTGRES_DB=Moviez_Database
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=secret
+
+
+COPY ./init.sql /docker-entrypoint-initdb.d
+
+
+
+
+
+
+
+

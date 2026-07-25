@@ -25,7 +25,15 @@ public class TestKafkaTopicConfig {
         this.contextRunner
         .run(context -> {
                     assertThat(context).hasBean("kafkaAdmin");
+
                 });
+
+    }
+
+    @Test
+    void TestIfTopicExits()
+    {
+
 
     }
 }

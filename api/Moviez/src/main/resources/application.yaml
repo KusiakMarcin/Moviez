@@ -1,4 +1,12 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 126124465673-1oti5fot878o5a1budvpocrt57dqd58i.apps.googleusercontent.com
+            client-secret:
+            scope: openid, profile, email
   application:
     name: Moviez
   kafka:

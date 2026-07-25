@@ -1,5 +1,10 @@
 version: '3'
 services:
+
+  postgres18:
+    build:
+      context: ./server
+      dockerfile: dockerfile   
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.0
     container_name: zookeeper

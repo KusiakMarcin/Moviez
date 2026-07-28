@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Moviez
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 590200794270-2ohl0gevn1cgcmoqknmcgsh7grado99e.apps.googleusercontent.com
+            client-secret: ${CLIENT_SECRET}

@@ -18,14 +18,14 @@ CREATE TABLE Users(
 CREATE TABLE Movies(
 
     MovieId serial PRIMARY KEY,
-    Title varchar(100) NOT NULL,
+    Title varchar(100) NOT NULL
 
 
 );
 
 CREATE TABLE Cinemas(
 
-    Cinema_Id serial PRIMARY KEY,
+    Cinema_Id serial PRIMARY KEY
 
 
 );
@@ -48,11 +48,11 @@ CREATE TABLE Tickets(
 
     TicketId serial PRIMARY KEY,
     SitNumber integer NOT NULL,
-    SitRow varchar(1) NOT NULL,
+    SitRow varchar(1) NOT NULL
 
 
 
-)
+);
 
 CREATE TABLE Payments(
 
@@ -61,4 +61,4 @@ CREATE TABLE Payments(
 
     CONSTRAINT fk_Tickets FOREIGN KEY (TicketId) REFERENCES Tickets(TicketId)
 
-)
+);

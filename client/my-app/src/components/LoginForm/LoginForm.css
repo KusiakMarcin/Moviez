@@ -1,0 +1,102 @@
+div.LoginForm {
+  padding: 3rem 4rem;
+  border: 2px solid;
+  border-color: rgb(212, 212, 218);
+  border-radius: 1rem;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.OptionsWrapper {
+  margin-top: 1rem; /* Pushes the wrapper 10rem away from the inputs */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the text and the Google button */
+  gap: 1.5rem; /* Space between the text and the Google button */
+  
+  /* Font and Color Styling */
+  color: #777777; /* Greyish text color */
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* Style for the 'Sign In!' link */
+.OptionsWrapper a {
+  color: #555555; /* Slightly darker grey for the link */
+  text-decoration: none; /* Removes the default blue underline */
+  font-family: "Roboto", sans-serif;
+  font-weight: bold; /* Makes the link pop out slightly from the text */
+  transition: color 0.2s ease;
+}
+
+/* Hover effect for the link */
+.OptionsWrapper a:hover {
+  color: #23c483; /* Changes to your green accent color on hover! */
+  text-decoration: underline;
+}
+/* NEW: Controls the width of the inputs and aligns the button */
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 320px; /* Matches your Google button width */
+}
+
+/* From Uiverse.io by Praashoo7 */ 
+.input {
+  width: 100%; /* NEW: Stretches the input */
+  box-sizing: border-box; /* NEW: Prevents padding from breaking the width */
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  padding: 1em;
+  background-color: #dddddd;
+  box-shadow: inset 1px 2px 5px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
+}
+
+.input:focus {
+  background-color: #dddddd;
+  transform: scale(1.05);
+  box-shadow: inset 1px 2px 5px rgba(0,0,0,0.3); 
+}
+
+/* From Uiverse.io by cssbuttons-io */ 
+button.LoginButton {
+  align-self: flex-end; /* NEW: Pushes the button to the right side */
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button.LoginButton:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #dfdfdf;
+  transform: scale(1.05);
+}
+
+button.LoginButton:active {
+  transform: translateY(-1px);
+}
+
+div.OptionsWrapper
+{   font-style: inherit;
+    padding: 50px;
+}
+

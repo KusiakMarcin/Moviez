@@ -2,9 +2,17 @@ server:
   port: 8080
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: Moviez
-
+  payu:
+    api:
+      payu-order: "https://secure.snd.payu.com/api/v2_1/orders"
+      payu-token: "https://secure.snd.payu.com/pl/standard/user/oauth/authorize"
+    shop:
+      client-id: 516019
+      client-secret: ${CLIENT_PAYU_SECRET}
   kafka:
     bootstrap-servers: localhost:9092
 
@@ -14,4 +22,4 @@ spring:
         registration:
           google:
             client-id: 590200794270-2ohl0gevn1cgcmoqknmcgsh7grado99e.apps.googleusercontent.com
-            client-secret: ${CLIENT_SECRET}
+            client-secret: ${CLIENT_OAUTH_SECRET}

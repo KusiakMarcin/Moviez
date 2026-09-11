@@ -1,49 +1,62 @@
-import React from "react";
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import keycloak from './keycloak';
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import Movies from './pages/Movies';
+import SeatSelection from './pages/SeatSelection';
+import PaymentSuccessPage from './pages/PaymentResultPage';
+import ProtectedRoute from './ProtectedRouteProps';
+import ProfilePage from './pages/ProfilePage';
 
+export default function App() {
+  const [isInitialized, setIsInitialized] = useState(false);
+  const isRun = useRef(false);
 
-import LoginPage from "./components/Pages/LoginPage";
-import HomePage from "./components/Pages/HomePage";
+  useEffect(() => {
+    if (isRun.current) return;
+    isRun.current = true;
 
-const App = () =>
-    {
+    // 1. INTERCEPT PAYU PARAMS BEFORE KEYCLOAK SEES THEM
+    const queryParams = new URLSearchParams(window.location.search);
+    const payuOrderId = queryParams.get('orderId');
+    const payuError = queryParams.get('error');
 
+    if (payuOrderId || payuError) {
+      // Store them safely in session storage so PaymentSuccessPage can read them
+      if (payuOrderId) sessionStorage.setItem('payu_orderId', payuOrderId);
+      if (payuError) sessionStorage.setItem('payu_error', payuError);
 
+      // Immediately clean the URL so Keycloak's OIDC parser ignores them completely
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
-        return (
-                <body>
-                    
-                    <style>@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');</style>
-                
-                    <BrowserRouter>
-                    <nav>
-                        <Link to ="/"> Home</Link>
-                        <Link to ="/login">Login</Link>
+    // 2. NOW safely initialize Keycloak
+    keycloak.init({ onLoad: 'check-sso' })
+      .then(() => setIsInitialized(true))
+      .catch(err => console.error("Keycloak init failed", err));
+  }, []);
 
-                    </nav>
+  if (!isInitialized) return <div style={{ padding: '20px' }}>Loading Cinema...</div>;
 
-                    <Routes>
-                        
-                        
-
-
-
-                        <Route path="/" element ={<HomePage/>}/>
-                        <Route path="/login" element={<LoginPage/>}/>
-
-                    </Routes>                    
-                    
-                    </BrowserRouter>
-                    
-                </body>
-                
-                
-                    
-                    
-                
-            
-        )
-    };
-
-
-export default App;
+  return (
+    <BrowserRouter>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/payment-success" element={<PaymentSuccessPage />} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/book/:showingId" element={
+          <ProtectedRoute>
+            <SeatSelection />
+          </ProtectedRoute>
+        } />
+      </Routes>
+    </BrowserRouter>
+  );
+}

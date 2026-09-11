@@ -10,15 +10,14 @@ import org.springframework.kafka.core.KafkaAdmin;
 @Configuration
 public class KafkaTopicConfig {
 
-
     @Bean
     public KafkaAdmin kafkaAdminSetup(KafkaProperties props) {
-
         return new KafkaAdmin(props.buildAdminProperties());
     }
 
     @Bean
-    public NewTopic topic1() {
-        return new NewTopic("baeldung", 1, (short) 1);
+    public NewTopic paymentNotificationsTopic() {
+        // Creates a topic named 'payment-notifications' with 1 partition and replication factor of 1
+        return new NewTopic("payment-notifications", 1, (short) 1);
     }
 }

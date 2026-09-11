@@ -6,59 +6,54 @@
 
 
 
-CREATE TABLE Users(
-
+CREATE TABLE Users (
     UserId serial PRIMARY KEY,
-    Email varchar(100)  NOT NULL UNIQUE,
-    Password varchar(100)  NOT NULL
-
-
+    Email varchar(100) NOT NULL UNIQUE,
+    KeycloakId varchar(100) UNIQUE -- Links to the Keycloak subject (sub) claim
 );
 
-CREATE TABLE Movies(
-
+CREATE TABLE Movies (
     MovieId serial PRIMARY KEY,
-    Title varchar(100) NOT NULL
-
-
+    Title varchar(100) NOT NULL,
+    DurationMinutes integer NOT NULL,
+    PosterUrl varchar(255)
 );
 
-CREATE TABLE Cinemas(
-
-    Cinema_Id serial PRIMARY KEY
-
-
+CREATE TABLE Cinemas (
+    CinemaId serial PRIMARY KEY,
+    Name varchar(100) NOT NULL,
+    City varchar(100) NOT NULL,
+    Address varchar(255) NOT NULL
 );
 
 
 
-CREATE TABLE Showings(
-
+CREATE TABLE Showings (
     ShowingId serial PRIMARY KEY,
-    CinemaId integer,
-    MovieId integer,
-    Showing_Date timestamp NOT NULL,
-
-    CONSTRAINT fk_Cinemas FOREIGN KEY (CinemaID) REFERENCES Cinemas(Cinema_Id),
+    CinemaId integer NOT NULL,
+    MovieId integer NOT NULL,
+    ShowingTime timestamp NOT NULL,
+    BasePrice decimal(10,2) NOT NULL,
+    CONSTRAINT fk_Cinemas FOREIGN KEY (CinemaId) REFERENCES Cinemas(CinemaId),
     CONSTRAINT fk_Movies FOREIGN KEY (MovieId) REFERENCES Movies(MovieId)
-
 );
 
-CREATE TABLE Tickets(
-
+CREATE TABLE Tickets (
     TicketId serial PRIMARY KEY,
+    ShowingId integer NOT NULL,
+    UserId integer NOT NULL,
     SitNumber integer NOT NULL,
-    SitRow varchar(1) NOT NULL
-
-
-
+    SitRow varchar(2) NOT NULL,
+    payu_order_id varchar(100),
+    Status varchar(20) DEFAULT 'RESERVED',
+    CONSTRAINT fk_Showings FOREIGN KEY (ShowingId) REFERENCES Showings(ShowingId),
+    CONSTRAINT fk_Users FOREIGN KEY (UserId) REFERENCES Users(UserId)
 );
 
-CREATE TABLE Payments(
-
+CREATE TABLE Payments (
     PaymentId serial PRIMARY KEY,
     TicketId integer NOT NULL,
-
+    Amount decimal(10,2) NOT NULL,
+    PaymentDate timestamp DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_Tickets FOREIGN KEY (TicketId) REFERENCES Tickets(TicketId)
-
 );

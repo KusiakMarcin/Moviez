@@ -12,6 +12,7 @@ CREATE TABLE Users (
     KeycloakId varchar(100) UNIQUE -- Links to the Keycloak subject (sub) claim
 );
 
+
 CREATE TABLE Movies (
     MovieId serial PRIMARY KEY,
     Title varchar(100) NOT NULL,

@@ -76,22 +76,26 @@ export default function Movies() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1>Upcoming Showings</h1>
-      
-      {/* Search Filters */}
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '30px', padding: '15px', background: '#f5f5f5', borderRadius: '8px' }}>
+    <div className ="flex w-max p-20 max-w-1200 bg-blue-100 font-mono">
+      <div className="flex gap-10">
+        <div className="text-4x1 font-bold font-stretch-extra-condensed">Upcoming Showings</div>
+        <div className ="flex">
         <div>
-          <label style={{ marginRight: '10px', fontWeight: 'bold' }}>City:</label>
+          <label >City:</label>
           <input 
             type="text" 
             value={city} 
             onChange={(e) => setCity(e.target.value)}
-            style={{ padding: '5px' }}
+            
           />
         </div>
         {/* Date input removed for a simpler "All Upcoming" view */}
       </div>
+      <div>XDDD</div>
+        </div>
+      
+      {/* Search Filters */}
+      
 
       {/* Error and Loading States */}
       {error && <p style={{ color: 'red' }}>{error}</p>}

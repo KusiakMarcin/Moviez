@@ -8,7 +8,7 @@ import SeatSelection from './pages/SeatSelection';
 import PaymentSuccessPage from './pages/PaymentResultPage';
 import ProtectedRoute from './ProtectedRouteProps';
 import ProfilePage from './pages/ProfilePage';
-
+import './App.css'
 export default function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   const isRun = useRef(false);
@@ -31,12 +31,13 @@ export default function App() {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // 2. NOW safely initialize Keycloak
-    keycloak.init({ onLoad: 'check-sso' })
+    // keycloack init
+  console.log(import.meta.env.VITE_MOCK_SERVICES);  
+  if(import.meta.env.VITE_MOCK_SERVICES === 'true') setIsInitialized(true);
+  else keycloak.init({ onLoad: 'check-sso' })
       .then(() => setIsInitialized(true))
       .catch(err => console.error("Keycloak init failed", err));
   }, []);
-
   if (!isInitialized) return <div style={{ padding: '20px' }}>Loading Cinema...</div>;
 
   return (

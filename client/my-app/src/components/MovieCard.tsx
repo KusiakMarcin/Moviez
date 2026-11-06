@@ -7,7 +7,7 @@ export default function MovieCard()
 
     return (
 
-        <div class >
+        <div >
 
         </div>
     )

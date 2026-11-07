@@ -2,7 +2,7 @@ import React from 'react';
 import MapComponent from '../components/MapComponent';
 export default function Home() {
   return (
-    <div className="p-20">
+    <div className="relative bg-black">
       <MapComponent></MapComponent>
     </div>
   );

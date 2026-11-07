@@ -1,31 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import keycloak from '../keycloak';
+import MapComponent from './MapComponent';
+
+const [locationPopUp, setLocationPopUp] = useState(false);
+
+
 
 export default function Navigation() {
+  
+  
+  
   return (
-    <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '15px 30px', background: '#222', color: 'white', alignItems: 'center' }}>
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
-        <Link to="/movies" style={{ color: 'white', textDecoration: 'none' }}>Movies</Link>
+    <nav className='flex-row'>
+      <div className="relative flex p-20 flex-nowrap justify-between items-center content-stretch gap-x-20px pbs-10 pbe-10 bg-black text-navbar-500 w-full">
+  
+      <div className="text-inherit">
+        LogoContainer
       </div>
+      
+      
+      <div className='flex gap-5'>
+        <div className="text-inherit">
+        Location
+      </div>
+        <div className="text-inherit ms-20">
+        Login
+      </div>
+  
+      <div className="text-inherit">
+        Registration
+      </div></div>
+      
+    </div>
+    <div className='relative flex-space items-center content-stretch bg-navbar-500 w-full h-15 pt-2 pb-2'>
+      <div className='relative w-20 h-full bg-black-500'></div>
+      <div>navbut</div>
 
-      <div>
-        {keycloak.authenticated ? (
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <span>Hello, {keycloak.tokenParsed?.preferred_username}</span>
-            {/* Added Profile Link */}
-            <Link to="/profile" style={{ color: '#e50914', textDecoration: 'none', fontWeight: 'bold' }}>Profile</Link>
-            <button onClick={() => keycloak.logout()} style={{ background: '#444', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer', borderRadius: '4px' }}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <button onClick={() => keycloak.login()} style={{ background: '#e50914', color: 'white', border: 'none', padding: '8px 15px', cursor: 'pointer', borderRadius: '4px' }}>
-            Login
-          </button>
-        )}
-      </div>
+    </div>
+    
+    
+
     </nav>
+
+
+    
+
+
+      
+    
   );
 }

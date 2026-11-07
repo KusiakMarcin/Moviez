@@ -3,4 +3,15 @@
 @theme
 {
     --color-background-500: oklch(0.1618 0.0321 333.83);
+    --color-navbar-500: #ff4c4cFF;
+}
+
+
+
+html, body {
+  margin: 0;
+  background-color: black;
+  min-height: 100%;
+  min-width: 100%;
+  padding: 0;
 }
